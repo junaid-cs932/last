@@ -1,0 +1,849 @@
+/* === ROOT VARIABLES & BASE === */
+:root {
+    --dark-bg: #2c333c;
+    --teal-accent: #45b8ac;
+    --text-light: #f0f3f5;
+    --text-muted-custom: #adb5bd;
+    --font-script: 'Pacifico', cursive;
+    --font-sans: 'Open Sans', sans-serif;
+
+    /* Base Heights for Waves and Header (Desktop First) */
+    --wave-base-height: 100px;
+    --header-height: 70px;
+
+    /* Base Section Paddings (Desktop First) */
+    --section-padding-y-xl: 120px;
+    --section-padding-y-lg: 100px;
+    --section-padding-y-md: 80px;
+    --section-padding-y-sm: 60px;
+    --section-padding-y-xs: 40px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Base Body Styles */
+body {
+    font-family: var(--font-sans);
+    color: var(--text-light);
+    background-color: var(--dark-bg);
+    margin: 0;
+    padding-top: var(--header-height);
+    overflow-x: hidden;
+    line-height: 1.65;
+    font-weight: 400;
+}
+
+/* General Image Responsiveness - CRITICAL FOR ALL IMAGES */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* === Navbar === */
+.navbar {
+    background-color: var(--dark-bg);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.navbar.fixed-top.scrolled {
+    background-color: rgba(44, 51, 60, 0.95);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.navbar .nav-link {
+    color: var(--text-light);
+    font-weight: 600;
+    margin-right: 1.5rem;
+    padding-bottom: 8px;
+    position: relative;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+    color: var(--teal-accent);
+}
+.navbar .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: var(--teal-accent);
+    border-radius: 1.5px;
+}
+.navbar-brand img.site-logo {
+    max-height: 30px;
+    width: auto;
+    max-width: 150px;
+    object-fit: contain;
+}
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.2);
+    background-color: transparent;
+    padding: 0.5rem 0.75rem;
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28240, 243, 245, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* === General Section Styling === */
+.content-section {
+    padding-top: var(--section-padding-y-lg);
+    padding-bottom: calc(var(--section-padding-y-lg) + var(--wave-base-height));
+    position: relative;
+    overflow: hidden;
+    min-height: 65vh;
+}
+.content-section:last-of-type, /* e.g. Footer might not have a wave below it */
+.get-voucher-button-section { /* This specific section doesn't have a wave */
+    padding-bottom: var(--section-padding-y-lg);
+}
+.branches-section { /* Assuming branches section has a wave below it */
+     padding-bottom: calc(var(--section-padding-y-lg) + var(--wave-base-height));
+}
+.footer-section { /* Assuming footer is last, wave is above it */
+    padding-top: var(--section-padding-y-lg); /* Space for wave from section above */
+    padding-bottom: var(--section-padding-y-md); /* Normal bottom padding */
+}
+
+
+.dark-bg { background-color: var(--dark-bg); color: var(--text-light); }
+.teal-bg { background-color: var(--teal-accent); color: var(--dark-bg); }
+
+/* Color overrides for teal-bg section content */
+.teal-bg .section-title-script,
+.teal-bg .section-text,
+.teal-bg .section-title-sans-bold,
+.teal-bg .opening-time-slot,
+.teal-bg .opening-time-detail,
+.teal-bg .footer-logo-text,
+.teal-bg .footer-links h5,
+.teal-bg .footer-contact h5,
+.teal-bg .footer-links ul li a,
+.teal-bg .footer-contact p {
+    color: var(--dark-bg) !important;
+}
+.teal-bg .btn-order-now.btn-dark {
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+}
+.teal-bg .btn-dark:hover { background-color: #1e2328; }
+
+/* Color overrides for dark-bg section content */
+.dark-bg .section-title-script,
+.dark-bg .hero-title-main,
+.dark-bg .hero-headline-main,
+.dark-bg .reviewer-name {
+    color: var(--text-light);
+}
+.dark-bg .section-text,
+.dark-bg .hero-text-main,
+.dark-bg .review-text,
+.dark-bg .branch-text {
+    color: var(--text-muted-custom);
+}
+
+/* === Section 1: Hero === */
+.hero-section-main {
+    padding-top: calc(var(--header-height) + 40px);
+    padding-bottom: calc(var(--wave-base-height) + 70px);
+    min-height: 95vh;
+    position: relative;
+    overflow: hidden;
+}
+.hero-content-container { /* This is the Bootstrap .container div */
+    z-index: 2;
+    position: absolute;
+    top: 30%;
+    left: 50%; /* Center the container itself */
+    transform: translateX(-50%); /* Correctly center */
+    width: 100%; /* Allow .container class to manage its own width and padding */
+}
+
+.hero-text-col { /* This is the .col-lg-6 inside .hero-content-container > .row */
+    z-index: 3;
+    text-align: center; /* Default for mobile */
+}
+.hero-title-main {
+    font-family: var(--font-script);
+    font-size: clamp(3rem, 9vw, 6rem);
+    margin-bottom: 0.25rem;
+    color: var(--text-light);
+}
+.hero-headline-main { /* Not used in HTML, but styled for completeness */
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+.hero-text-main { /* Not used for hero description in HTML, but styled */
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    line-height: 1.75;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2.5rem;
+    color: var(--text-muted-custom);
+}
+
+.hero-section-image {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative; /* Mobile: flows after abs-positioned text container */
+    z-index: 1;
+    margin: 2rem auto 0 auto; /* Pushes image down on mobile */
+}
+
+/* === Section 2 & 3 (Black Coffees, Hot Coffees) === */
+.section-row { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.section-title-script {
+    font-family: var(--font-script);
+    font-size: clamp(2.8rem, 7vw, 4rem);
+    margin-bottom: 1.5rem;
+}
+.section-image {
+    width: 100%;
+    max-width: 510px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 25px;
+    margin: 0 auto; /* Center image in its column */
+}
+/* Removed .c1 specific style, rely on Bootstrap columns and text-align */
+
+.dark-bg .section-text, .teal-bg .section-text {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto 1.5rem auto; /* Center text block and add bottom margin */
+}
+
+/* Buttons */
+.btn-order-now {
+    font-weight: 700;
+    padding: 14px 35px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.btn-teal {
+    background-color: var(--teal-accent); color: var(--text-light);
+   margin-top: 50px ; /* Specific to hero button */
+ }
+.btn-teal:hover { background-color: #3aa89b; color: var(--text-light); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+.btn-dark { background-color: var(--dark-bg); color: var(--text-light); }
+.btn-dark:hover { background-color: #1e2328; color: var(--text-light); transform: translateY(-2px); }
+
+/* === Section 4: Voucher Promo === */
+.voucher-promo-section {
+    padding-top: var(--section-padding-y-lg);
+    padding-bottom: var(--section-padding-y-lg);
+}
+.voucher-card {
+    display: flex;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    min-height: 300px;
+    background-color: #3a414a;
+    position: relative;
+    flex-direction: column; /* Mobile-first: stack vertically */
+}
+.voucher-image-area {
+    flex: 1 1 auto;
+    position: relative;
+    min-height: 200px; /* For mobile */
+}
+.voucher-coffee-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.discount-tag {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-5deg);
+    background-color: var(--teal-accent);
+    color: var(--text-light);
+    padding: 10px 20px 10px 30px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    z-index: 5;
+    clip-path: polygon(5% 0,95% 0,100% 50%,95% 100%,5% 100%,0 50%);
+}
+.voucher-details-area {
+    flex: 1 1 auto;
+    padding: 30px 20px;
+    background-color: var(--teal-accent);
+    color: var(--dark-bg);
+    position: relative;
+    text-align: center; /* Mobile-first */
+}
+.voucher-logo-header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Mobile-first */
+    margin-bottom: 10px;
+}
+.voucher-small-logo {
+    height: 24px;
+    width: auto;
+    margin-right: 10px;
+    filter: brightness(0.1);
+}
+.voucher-details-area h3 {
+    font-family: var(--font-sans); font-weight: 700; font-size: clamp(1.4rem, 3vw, 1.6rem);
+    color: var(--dark-bg); margin-bottom: 5px; line-height: 1.3;
+}
+.voucher-subtext {
+    font-size: clamp(0.8rem, 1.8vw, 0.85rem); margin-bottom: 20px; color: var(--dark-bg);
+    opacity: 0.9; line-height: 1.5;
+}
+.btn-voucher-cta {
+    background-color: var(--dark-bg); color: var(--text-light);
+    padding: 12px 28px; font-size: 0.9rem; border-radius: 6px;
+    display: inline-block; margin-bottom: 20px; font-weight: 700;
+    transition: background-color 0.3s ease;
+}
+.btn-voucher-cta:hover { background-color: #1a1e22; }
+.voucher-social-icons {
+    position: static; /* Mobile-first */
+    margin-top: 15px;
+    text-align: center; /* Mobile-first */
+}
+.voucher-social-icons a { color: var(--dark-bg); margin: 0 8px; font-size: 1rem; opacity: 0.75; transition: opacity 0.3s ease; }
+.voucher-social-icons a:hover { opacity: 1; }
+
+/* === Section 5: Standalone Get Voucher Button === */
+.get-voucher-button-section {
+    padding-top: var(--section-padding-y-sm);
+    padding-bottom: var(--section-padding-y-sm);
+}
+.btn-get-voucher-main {
+    background-color: var(--teal-accent); border-color: var(--teal-accent);
+    color: var(--text-light); padding: 18px 45px; font-size: 1.2rem;
+    font-weight: 700; border-radius: 10px;
+    transition: all 0.3s ease;
+}
+.btn-get-voucher-main:hover { background-color: #3aa89b; border-color: #3aa89b; transform: translateY(-2px); }
+
+/* === Section 6: Customer Reviews === */
+.reviews-section {
+    padding-top: var(--section-padding-y-lg);
+    padding-bottom: calc(var(--section-padding-y-lg) + var(--wave-base-height));
+}
+.review-card { text-align: center; margin-bottom: 30px; }
+.review-image-wrapper {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 15px auto;
+    clip-path: circle(50% at 50% 50%);
+    border: 4px solid var(--teal-accent);
+    overflow: hidden;
+}
+.reviewer-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.reviewer-name {
+    font-family: var(--font-script); font-size: clamp(1.6rem, 3.5vw, 1.8rem);
+    margin-bottom: 8px; color: var(--text-light);
+}
+.review-text {
+    font-size: clamp(0.85rem, 1.8vw, 0.9rem); line-height: 1.7;
+    max-width: 450px; margin-left: auto; margin-right: auto;
+    color: var(--text-muted-custom);
+}
+
+/* === Section 7: We are Open === */
+.open-hours-section { /* Teal BG */
+    padding-top: var(--section-padding-y-lg);
+    padding-bottom: calc(var(--section-padding-y-lg) + var(--wave-base-height));
+    text-align: center;
+}
+.section-title-sans-bold {
+    font-family: var(--font-sans); font-weight: 700; font-size: clamp(2rem, 5vw, 2.6rem);
+}
+.opening-time-slot { font-weight: 700; font-size: clamp(1.1rem, 2.5vw, 1.25rem); margin-bottom: 5px; }
+.opening-time-detail { font-size: clamp(1rem, 2.2vw, 1.15rem); opacity: 0.9; }
+
+/* === Section 8: Our Branches === */
+.branches-section {
+    padding-top: var(--section-padding-y-lg);
+    padding-bottom: calc(var(--section-padding-y-lg) + var(--wave-base-height));
+}
+.branch-card { text-align: center; margin-bottom: 30px; display: flex; flex-direction: column; align-items: center; }
+.branch-img {
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 4px solid var(--teal-accent);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+.branch-tag {
+    display: inline-block; background-color: var(--teal-accent); color: var(--text-light);
+    padding: 8px 22px; border-radius: 25px; font-weight: 700;
+    font-size: 0.95rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.8px;
+}
+.branch-text { font-size: clamp(0.85rem, 1.8vw, 0.9rem); line-height: 1.65; padding-left: 10px; padding-right: 10px; color: var(--text-muted-custom); }
+
+/* === Section 9: Footer === */
+.footer-section { /* Teal BG */
+    padding-top: var(--section-padding-y-lg);
+    padding-bottom: var(--section-padding-y-md);
+}
+.footer-logo-area { display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
+.footer-logo { height: 35px; width: auto; margin-right: 10px; filter: brightness(0.2); }
+.footer-logo-text { font-weight: 700; font-size:1.1rem; }
+.footer-links h5, .footer-contact h5 {
+    font-family: var(--font-sans); font-weight: 700;
+    margin-bottom: 1rem; font-size: 1.1rem;
+    color: var(--dark-bg);
+}
+.footer-links ul { list-style: none; padding-left: 0; }
+.footer-links ul li a {
+    text-decoration: none; font-size: 0.9rem;
+    color: var(--dark-bg);
+    opacity: 0.9; line-height: 1.9;
+    transition: opacity 0.3s ease, text-decoration 0.3s ease;
+}
+.footer-links ul li a:hover { opacity: 1; text-decoration: underline; }
+.footer-contact p {
+    font-size: 0.9rem; margin-bottom: 8px; opacity: 0.9;
+    color: var(--dark-bg);
+}
+.footer-links, .footer-contact { text-align: center; margin-bottom: 1.5rem; }
+
+
+/* === Wave Dividers === */
+.wave-divider {
+    position: absolute;
+    bottom: -1px; /* Slight overlap to prevent gaps with next section */
+    left: 0;
+    width: 100%;
+    height: var(--wave-base-height);
+    z-index: 2;
+    overflow: hidden;
+    line-height: 0; /* Remove any line-height if div not empty */
+}
+/* If you are using actual <img> or <svg> tags inside .wave-divider for the wave visual: */
+.wave-divider img, .wave-divider svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill; /* Or cover, depending on wave asset */
+    object-position: bottom;
+}
+/* If your waves are background images on these divs, style them here.
+   Example: .wave-1 { background: url(...) ...; }
+   The current HTML has empty .wave-divider divs.
+*/
+
+
+/* === Background Icons === */
+.section-background-icons { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;}
+.bg-icon { position: absolute; opacity: 0.06; }
+.dark-bg .bg-icon { filter: invert(1) opacity(0.5); }
+.teal-bg .bg-icon.dark-icon { filter: brightness(0) invert(0.1) opacity(0.7); }
+
+/* Precise Icon Positioning - Adjusted for wave height */
+.s1-icon-1 { top: 20%; left: 50%; width: 45px; transform: translateX(-100%) rotate(-20deg); }
+.s1-icon-2 { top: 10%; left: 60%; width: 30px; transform: rotate(15deg); }
+.s1-icon-3 { bottom: calc(var(--wave-base-height) + 70px); left: 15%; width: 55px; transform: rotate(5deg); }
+
+.s2-icon-1 { top: 10%; right: 15%; width: 40px; transform: rotate(30deg); }
+.s2-icon-2 { bottom: calc(var(--wave-base-height) + 20%); left: 5%; width: 50px; transform: rotate(-10deg); }
+.s2-icon-3 { top: 50%; right: 5%; width: 35px; }
+.s2-icon-4 { top: 30%; left: 30%; width: 25px; transform: rotate(45deg); }
+
+.s3-icon-1 { top: 15%; left: 10%; width: 45px; transform: rotate(-25deg); }
+.s3-icon-2 { bottom: calc(var(--wave-base-height) + 10%); right: 10%; width: 30px; transform: rotate(20deg); }
+.s3-icon-3 { top: 40%; left: 45%; width: 50px; }
+.s3-icon-4 { top: 5%; right: 25%; width: 20px; transform: rotate(10deg); }
+
+.rev-icon-1 { top: 25%; left: 5%; width: 30px; transform: rotate(10deg); }
+.rev-icon-2 { bottom: calc(var(--wave-base-height) + 15%); right: 10%; width: 40px; transform: rotate(-30deg); }
+.rev-icon-3 { top: 5%; right: 20%; width: 25px; }
+
+.open-icon-1 { top: 15%; left: 10%; width: 40px; transform: rotate(15deg); }
+.open-icon-2 { bottom: calc(var(--wave-base-height) + 20%); right: 15%; width: 50px; transform: rotate(-20deg); }
+.open-icon-3 { top: 30%; right: 5%; width: 30px; }
+.open-icon-4 { bottom: calc(var(--wave-base-height) + 5%); left: 20%; width: 25px; transform: rotate(35deg); }
+
+.branch-icon-1 { top: 20%; right: 10%; width: 45px; transform: rotate(25deg); }
+.branch-icon-2 { bottom: calc(var(--wave-base-height) + 10%); left: 15%; width: 50px; transform: rotate(-15deg); }
+.branch-icon-3 { top: 5%; left: 30%; width: 35px; }
+
+
+/* ========================================================================== */
+/* ======================== RESPONSIVE MEDIA QUERIES ======================== */
+/* ========================================================================== */
+
+/* --- Extra Large Devices (XL - Laptops & Desktops, 1200px and up) --- */
+@media (min-width: 1200px) {
+    .navbar {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+    .navbar .nav-link {
+        font-size: 1rem;
+        margin-right: 2rem;
+    }
+    .navbar-brand img.site-logo {
+        max-height: 35px;
+    }
+
+    .hero-text-col { /* Inside .hero-content-container > .row */
+        /* margin-left: 250px; Replaced with padding */
+        padding-left: 15%; /* Creates space on the left for the image to appear beside */
+        max-width: 600px; /* Control width of text block */
+        text-align: left;
+    }
+
+    .hero-section-image {
+        position: absolute;
+        right: 60px;
+        top: 20%;
+        transform: translateY(-50%); /* Vertically centers image around the 20% top line */
+        width: 520px;
+        height: 520px;
+        margin: 0;
+    }
+
+    .voucher-card {
+        flex-direction: row;
+        min-height: 330px;
+    }
+    .voucher-image-area {
+        flex: 0 0 45%;
+        clip-path: polygon(0% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 0% 100%);
+        min-height: 330px; /* Match card height */
+    }
+    .voucher-details-area {
+        flex: 0 0 55%;
+        clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 10% 100%, 0% 85%, 0% 15%);
+        text-align: left;
+        padding: 35px 35px 35px 50px; /* T R B L */
+    }
+    .discount-tag {
+        top: 30px;
+        left: -20px; /* Overlap effect */
+        transform: rotate(-5deg);
+        clip-path: polygon(15% 0%, 100% 0%, 85% 50%, 100% 100%, 15% 100%, 0% 50%);
+    }
+    .voucher-logo-header {
+        justify-content: flex-start;
+    }
+    .voucher-social-icons {
+        position: absolute;
+        bottom: 25px;
+        right: 35px;
+        margin-top: 0;
+    }
+
+    .footer-logo-area, .footer-links, .footer-contact {
+        text-align: left;
+        justify-content: flex-start;
+        margin-bottom: 0;
+    }
+    .footer-logo-area {
+        justify-content: flex-start;
+    }
+    .footer-logo { margin-right: 15px; margin-bottom: 0; }
+}
+
+/* --- Large Devices (LG - Desktops/Laptops, 992px - 1199.98px) --- */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    :root {
+        --section-padding-y-lg: 90px;
+        --header-height: 65px;
+        --wave-base-height: 90px;
+    }
+    body { padding-top: var(--header-height); }
+
+    .navbar .nav-link {
+        font-size: 0.95rem;
+        margin-right: 1.8rem;
+    }
+    .navbar-brand img.site-logo {
+        max-height: 30px;
+    }
+
+    .hero-text-col {
+        /* margin-left: 80px; Replaced with padding */
+        padding-left: 10%; /* Space for image */
+        text-align: left;
+        max-width: 550px;
+    }
+
+    .hero-section-image {
+        position: absolute;
+        right: 30px;
+        top: 50%; /* More centered vertically on LG */
+        transform: translateY(-50%);
+        width: 420px;
+        height: 420px;
+        margin: 0;
+    }
+
+    .voucher-card {
+        flex-direction: row;
+        min-height: 300px;
+    }
+    .voucher-image-area {
+        flex: 0 0 40%;
+        clip-path: polygon(0% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 0% 100%);
+        min-height: 300px;
+    }
+    .voucher-details-area {
+        flex: 0 0 60%;
+        clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 10% 100%, 0% 85%, 0% 15%);
+        text-align: left;
+        padding: 30px 25px 30px 40px; /* T R B L */
+    }
+    .discount-tag {
+        top: 25px; left: -15px; font-size: 1.1rem;
+    }
+    .voucher-logo-header { justify-content: flex-start; }
+    .voucher-social-icons { position: absolute; bottom: 20px; right: 30px; margin-top: 0;}
+}
+
+/* --- Medium Devices (MD - Tablets, 768px - 991.98px) --- */
+@media (max-width: 991.98px) {
+    :root {
+        --section-padding-y-lg: 80px; /* Base padding for MD */
+        --section-padding-y-md: 70px; /* Specific MD padding */
+        /* --section-padding-y-sm: 50px; */
+        --header-height: 60px;
+        --wave-base-height: 80px;
+    }
+    body { padding-top: var(--header-height); }
+
+    .content-section {
+        min-height: auto;
+        padding-top: var(--section-padding-y-lg);
+        padding-bottom: calc(var(--section-padding-y-lg) + var(--wave-base-height));
+    }
+    .content-section:last-of-type,
+    .get-voucher-button-section {
+        padding-bottom: var(--section-padding-y-lg);
+    }
+    .footer-section {
+        padding-top: var(--section-padding-y-lg);
+        padding-bottom: var(--section-padding-y-md);
+    }
+
+    .hero-section-main {
+        padding-top: calc(var(--header-height) + 20px);
+        min-height: auto;
+        padding-bottom: calc(var(--section-padding-y-lg) + var(--wave-base-height));
+    }
+
+    .navbar-collapse {
+        background-color: var(--dark-bg);
+        padding: 1rem;
+        margin-top: 0.5rem;
+        border-radius: 0.25rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 1030;
+    }
+    .navbar-nav { width: 100%; }
+    .navbar-nav .nav-item { width: 100%; }
+    .navbar .nav-link {
+        text-align: center;
+        padding: 0.75rem 1rem;
+        margin-right:0;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .navbar-nav .nav-item:last-child .nav-link { border-bottom: none; }
+    .navbar .nav-link.active::after {
+        left: 50%; transform: translateX(-50%); width: 50px;
+    }
+
+    .hero-content-container { /* Stack hero content */
+        position: relative;
+        top: auto; left: auto; transform: none;
+        padding-top: 2rem; /* Add some space above text */
+    }
+    .hero-text-col {
+        text-align: center !important; /* Ensure center alignment */
+        padding-left: 0 !important; /* Reset desktop padding */
+        margin-left: 0 !important;
+        margin-bottom: 1rem; /* Space between text and image */
+    }
+    .hero-section-image {
+        position: relative; /* In flow */
+        transform: none;
+        width: 80%;
+        max-width: 300px;
+        height: auto;
+        margin: 1rem auto 0 auto;
+    }
+
+    .section-image {
+        width: 80%; max-width: 350px; margin-bottom: 1.5rem;
+    }
+    .dark-bg .section-text, .teal-bg .section-text {
+        max-width: 90%;
+    }
+
+    .voucher-card { flex-direction: column; min-height: auto; }
+    .voucher-image-area, .voucher-details-area {
+        flex: 1 1 auto; clip-path: none !important; border-radius: 0;
+    }
+    .voucher-image-area { border-radius: 15px 15px 0 0; min-height: 220px; }
+    .voucher-details-area { border-radius: 0 0 15px 15px; padding: 25px; text-align: center; }
+    .discount-tag {
+        top: 15px; left: 50%; transform: translateX(-50%) rotate(-5deg); font-size: 1.1rem;
+    }
+    .voucher-logo-header { justify-content: center; }
+    .voucher-social-icons { position: static; margin-top: 20px; text-align: center; }
+
+    .review-image-wrapper { width: 120px; height: 120px; }
+    .branch-img { width: 150px; height: 150px; }
+
+    .footer-logo-area, .footer-links, .footer-contact {
+        text-align: center; margin-bottom: 2rem;
+    }
+    .footer-logo-area { justify-content: center; }
+}
+
+/* --- Small Devices (SM - Larger Phones, 576px - 767.98px) --- */
+@media (max-width: 767.98px) {
+    :root {
+        --section-padding-y-lg: 60px; /* Base padding for SM */
+        --section-padding-y-sm: 40px; /* Specific SM padding */
+        --header-height: 55px;
+        --wave-base-height: 60px;
+    }
+    /* body, content-section, hero-section-main paddings use MD's vars or set here */
+     .content-section {
+        padding-top: var(--section-padding-y-lg);
+        padding-bottom: calc(var(--section-padding-y-lg) + var(--wave-base-height));
+    }
+    .content-section:last-of-type,
+    .get-voucher-button-section {
+        padding-bottom: var(--section-padding-y-lg);
+    }
+     .footer-section {
+        padding-top: var(--section-padding-y-lg);
+        padding-bottom: var(--section-padding-y-sm);
+    }
+    .hero-section-main {
+        padding-top: calc(var(--header-height) + 15px);
+        padding-bottom: calc(var(--section-padding-y-lg) + var(--wave-base-height));
+    }
+
+    .navbar-brand img.site-logo { max-height: 25px; }
+    .navbar .nav-link { font-size: 0.95rem; padding: 0.7rem 0.5rem; }
+
+    .hero-title-main { font-size: clamp(2.5rem, 10vw, 3.5rem); }
+    .hero-section-image { width: 70%; max-width: 250px; margin-top: 1.5rem; }
+
+    .section-title-script { font-size: clamp(2.2rem, 8vw, 3rem); margin-bottom: 1rem; }
+    .section-image { width: 85%; max-width: 280px; margin-bottom: 1rem; }
+    .dark-bg .section-text, .teal-bg .section-text { font-size: 0.85rem; }
+
+    .btn-order-now, .btn-voucher-cta { padding: 12px 25px; font-size: 0.9rem; }
+    .btn-get-voucher-main { padding: 14px 30px; font-size: 1rem; }
+    .btn-teal { margin-top: 30px; } /* Reduced hero button margin */
+
+
+    .voucher-image-area { min-height: 200px; }
+    .discount-tag { font-size: 1rem; padding: 8px 15px 8px 25px; }
+    .voucher-details-area { padding: 20px; }
+    .voucher-details-area h3 { font-size: clamp(1.2rem, 4vw, 1.4rem); }
+    .voucher-subtext { font-size: 0.8rem; margin-bottom: 15px; }
+
+    .review-image-wrapper { width: 100px; height: 100px; }
+    .reviewer-name { font-size: clamp(1.4rem, 4vw, 1.6rem); }
+    .review-text { font-size: 0.8rem; }
+
+    .branch-img { width: 120px; height: 120px; }
+    .branch-tag { font-size: 0.9rem; padding: 6px 18px; }
+    .branch-text { font-size: 0.8rem; }
+
+    .footer-links h5, .footer-contact h5 { font-size: 1rem; }
+    .footer-links ul li a, .footer-contact p { font-size: 0.85rem; }
+}
+
+/* --- Extra Small Devices (XS - Small Phones, 575.98px and down) --- */
+@media (max-width: 575.98px) {
+    :root {
+        --section-padding-y-xs: 30px; /* Smallest padding unit */
+        --header-height: 50px;
+        /* --wave-base-height: 50px; Waves hidden, so not strictly needed for padding calc */
+    }
+
+    .content-section, .hero-section-main,
+    .reviews-section, .open-hours-section,
+    .branches-section, .footer-section,
+    .get-voucher-button-section {
+        padding-top: var(--section-padding-y-xs) !important;
+        padding-bottom: var(--section-padding-y-xs) !important;
+    }
+    .hero-section-main {
+        padding-top: calc(var(--header-height) + 10px) !important;
+    }
+
+    .section-background-icons, .wave-divider { display: none; }
+
+    .navbar-brand img.site-logo { max-height: 20px; }
+    .navbar .nav-link { font-size: 0.9rem; padding: 0.6rem 0.5rem; }
+
+    .hero-title-main { font-size: clamp(2rem, 10vw, 2.8rem); }
+    .hero-section-image { width: 60%; max-width: 180px; margin-top: 1rem; }
+    .btn-teal { margin-top: 20px; } /* Further reduced hero button margin */
+
+    .section-title-script { font-size: clamp(1.8rem, 9vw, 2.5rem); }
+    .section-image { width: 80%; max-width: 240px; margin-bottom: 0.8rem; }
+    .dark-bg .section-text, .teal-bg .section-text { font-size: 0.8rem; }
+
+    .btn-order-now, .btn-voucher-cta { padding: 10px 20px; font-size: 0.85rem; }
+    .btn-get-voucher-main { padding: 12px 22px; font-size: 0.9rem; }
+
+    .voucher-image-area { min-height: 160px; }
+    .discount-tag { font-size: 0.8rem; padding: 6px 12px 6px 20px; }
+    .voucher-details-area { padding: 15px; }
+    .voucher-details-area h3 { font-size: clamp(1.1rem, 4vw, 1.3rem); }
+    .voucher-subtext { font-size: 0.75rem; margin-bottom: 10px; }
+
+    .review-image-wrapper { width: 80px; height: 80px; }
+    .reviewer-name { font-size: clamp(1.2rem, 5vw, 1.4rem); }
+    .review-text { font-size: 0.75rem; }
+
+    .branch-img { width: 100px; height: 100px; }
+    .branch-tag { font-size: 0.8rem; padding: 5px 15px; }
+    .branch-text { font-size: 0.75rem; }
+
+    .footer-links h5, .footer-contact h5 { font-size: 0.9rem; }
+    .footer-links ul li a, .footer-contact p { font-size: 0.8rem; }
+}
